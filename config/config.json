@@ -1,0 +1,7 @@
+{
+    "server": "https://umbrellacorpsc.dev.local",
+    "user": { 
+        "login": "sitecore\\admin", 
+        "password": "b" 
+    }
+}
