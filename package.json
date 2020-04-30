@@ -1,20 +1,21 @@
 {
-  "name": "solutionname",
+  "name": "sxa-umbrella",
   "version": "1.0.0",
-  "description": "SXACLI solution setup with major enhancements",
+  "description": "Project structure and tooling to optimize front-end team development workflow in any Sitecore SXA project",
   "main": "src/main.js",
   "private": true,
   "engines": {
     "node": "11.15.0",
     "npm": "6.7.0"
   },
-  "homepage": "https://github.com/macaw-interactive/SXACLI-enhancements/blob/master/readme.md",
+  "homepage": "https://github.com/macaw-interactive/sxa-umbrella/blob/master/readme.md",
   "keywords": [
     "SXA",
     "Umbrella",
     "Sitecore Experience Accelerator",
     "SXACLI"
   ],
+  "author": "Serge van den Oever [Macaw]",
   "license": "MIT",
   "scripts": {
     "build-deploy-watch": "npm-run-all --serial build-deploy watch",
