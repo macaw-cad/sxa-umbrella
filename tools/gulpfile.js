@@ -17,6 +17,8 @@ const uploadFilesGlob = [
   '../Media Library/**/styles/**/*',
   '../Media Library/**/fonts/**/*',
   '../Media Library/**/images/**/*',
+  '!../Media Library/**/src/**/*',         // never upload something from the src folder
+  '!../Media Library/**/images/flags/**/*' // Skip the flags folder when a fixed legacy theme is used
 ];
 
 const processFileInPipeline = () => {

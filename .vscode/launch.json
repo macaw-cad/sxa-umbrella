@@ -13,8 +13,6 @@
                 "--gulpfile", "tools/gulpfile.js",
                 "fuillDeploy"
             ],
-            "runtimeArgs": [
-            ],
             "skipFiles": [
                 "<node_internals>/**"
             ]
@@ -29,8 +27,7 @@
                 "--gulpfile", "tools/gulpfile.js",
                 "watch"
             ],
-            "runtimeArgs": [
-            ],
+ 
             "skipFiles": [
                 "<node_internals>/**"
             ]

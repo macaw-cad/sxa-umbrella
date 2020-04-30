@@ -294,6 +294,14 @@ $grid-gutter-width: 80px !default;
 @import "~bootstrap/scss/grid.scss";
 ```
 
+# Tips & tricks
+
+In this section some tips & tricks to optimize your development with SXA Umbrella.
+
+# Maintain your .gitignore file
+
+Exclude the `scripts` and `styles` folders from your themes. The first version of SXA Umbrella tried to exclude these folders with a wildcard pattern, but this also excluded these folders from the `src` folder in themes. This broke legacy themes, where all theme SASS code is copied to the `src/theme` folder including a `styles` folder which was erroneously excluded. Specify the complete folder paths. Good Visual Studio Code extension to help you with this is [gitignore](https://marketplace.visualstudio.com/items?itemName=michelemelluso.gitignore). You cvan now right-click on the folders to exclude
+
 # Frequently asked questions
 
 ### Why is the `config/config.json` file a JSON file and not JavaScript?
