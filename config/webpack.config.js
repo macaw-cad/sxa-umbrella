@@ -129,7 +129,7 @@ function getSassLoaders(isProd, entryOutputName) {
 			loader: "postcss-loader",
 			options: {
 				config: {
-					path: './postcss.config.js'
+					path: path.resolve(__dirname, 'config/postcss.config.js')
 				}
 			}
 		});
@@ -191,6 +191,7 @@ module.exports = env => {
 	if (env.NODE_ENV !== 'development' && env.NODE_ENV !== 'production') {
         throw new Error(`NODE_ENV must we either 'development' or 'production', but got '${env.NODE_ENV}'.`);
 	}
+	console.log(`Current directory (__dirname): ${__dirname}`);
 	console.log(`Webpack build for ${env.NODE_ENV}:`);
 	
 	var isProd = (env.NODE_ENV === 'production');
