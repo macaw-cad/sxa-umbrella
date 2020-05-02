@@ -60,10 +60,10 @@ module.exports = function (filePath, server, login, password) {
 
     const relativeVariantRootPath = path.relative(global.rootPath, variantRootPath).replace(/\\/g,'/');
     if (!relativeVariantRootPath.endsWith('/-/scriban')) {
-        console.log(`Scriban import for '${filePath.path}' failed because 'metadata.json', redering variants and .scriban files MUST be in a folder '.../-/scriban'`.red);
+        console.log(`Scriban import for '${filePath}' failed because 'metadata.json', redering variants and .scriban files MUST be in a folder '.../-/scriban'`.red);
         return;
     }
-    const url = `${server}${updateScribanPath}?user=${login}&password=${password}&path=${filePath.path}`;
+    const url = `${server}${updateScribanPath}?user=${login}&password=${password}&path=${filePath}`;
     var formData = {
         streams: JSON.stringify(getPayload(variantRootPath)),
         metadata: JSON.stringify(JSON.parse(fs.readFileSync(metadataFilePath)))
