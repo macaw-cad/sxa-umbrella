@@ -5,43 +5,33 @@ const path = require('path');
 const spritesmith = require('gulp.spritesmith');
 
 // Fix the wildcard imports of the sass copied from the Sitecore default theme provided in @sxa/Theme.
-// The provided sass is not valid sass - top-level wildcard imports initially handled by gulp-sass-bulk-import
-// but does not work over multiple levels. Additional files with wilcard import:
-// - sass/styles/common/link-button.scss
-// Fix location of "base/.." folder - must be relative due to new build approach using webpack
+/// The provided sass which is an updated version of the Sitecore default theme is not valid sass - top-level wildcard imports 
+// initially handled by gulp-sass-bulk-import but does not work over multiple levels.
+// Fix location of "base/.." and "abstracts/.." folders - must be relative due to new build approach using webpack
 gulp.task('fix-defaulttheme-sass-for-webpack', function (done) {
+    const srcThemeSass = path.resolve('./node_modules/@sxa/Theme/sass/').replace(/\\/g,'/');
+    const destinationThemeSass = path.resolve('./sass/');
+    gulp
+      .src(path.join(srcThemeSass, '*.scss'))
+      .pipe(bulkSass())
+      // make @import path relative to sass folder
+      .pipe(gulpReplace(srcThemeSass, '.'))
+      .pipe(gulp.dest(destinationThemeSass));
+  
+    // fix "base/.. includes on deeper levels"
+    gulp
+      .src(path.join(srcThemeSass, '*/*.scss'))
+      .pipe(gulpReplace('"base/', '"../base/'))
+      .pipe(gulpReplace('"abstracts/', '"../abstracts/'))
+      .pipe(gulp.dest(destinationThemeSass));
     
     gulp
-        .src('sass/*.scss')
-        .pipe(bulkSass())
-        // make @import path relative to sass folder
-        .pipe(gulpReplace(path.join(__dirname, '/sass/').replace(/\\/g, '/'), './'))
-        .pipe(gulp.dest('sass/'));
-    
-    gulp
-        .src('sass/styles/common/link-button.scss')
-        .pipe(gulpReplace('@import "../../base/links/*"','@import "../../base/links/_link-button.scss"'))
-        .pipe(gulp.dest('sass/'));
-
-    gulp
-        .src('sass/*/*.scss')
-        .pipe(gulpReplace('"base/', '"../base/'))
-        .pipe(gulp.dest('sass/'));
-
-    gulp
-        .src('sass/*/*/*.scss')
-        .pipe(gulpReplace('"base/', '"../../base/'))
-        .pipe(gulp.dest('sass/'));
-
-    // sass/variants/*/*.scss: direct reference to @import "abstracts/xyz",
-    // instead of ../../abstracts/xyz
-    gulp
-        .src('sass/variants/*/*.scss')
-        .pipe(gulpReplace('"abstracts', '"../../abstracts'))
-        .pipe(gulp.dest('sass/variants/'));
-
-    done();
-
+      .src(path.join(srcThemeSass, '*/*/*.scss'))
+      .pipe(gulpReplace('"base/', '"../../base/'))
+      .pipe(gulpReplace('"abstracts/', '"../../abstracts/'))
+      .pipe(gulp.dest(destinationThemeSass));
+      
+    done();    
 });
 
 gulp.task('sprite-flag', function(done) {

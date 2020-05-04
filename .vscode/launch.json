@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
             "args": [
                 "--gulpfile", "tools/gulpfile.js",
-                "fuillDeploy"
+                "fullDeploy"
             ],
             "skipFiles": [
                 "<node_internals>/**"

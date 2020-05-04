@@ -1,16 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const request = require('request');
-const findUp = require('find-up');
+const got = require('got');
+const FormData = require('form-data');
 require('colors');
 
 const updateScribanPath = '/-/script/v2/master/ChangeScriban';
 
-function scribanFileFilter(name) {
-    return /(\.(scriban)$)/i.test(name);
-};
+const scribanFileFilter = name => /(\.(scriban)$)/i.test(name);
 
-var getScribanFiles = function (dir) {
+const getScribanFiles = dir => {
     var results = [];
     var list = fs.readdirSync(dir);
     list.forEach(function (file) {
@@ -27,10 +25,13 @@ var getScribanFiles = function (dir) {
     return results;
 }
 
-function getPayload(variantRootPath) {
+const getPayload = renderingVariantsRootPath => {
     var streams = []
-    getScribanFiles(variantRootPath).forEach((scribanFile) => {
+    getScribanFiles(renderingVariantsRootPath).forEach((scribanFile) => {
         var content = fs.readFileSync(scribanFile, 'utf8');
+        if (content.replace(/\s/g, '').length < 1) {
+            throw new Error({ message: `'${filePath}' is empty` });
+        }
         var b = Buffer.from(content, 'utf-8');
         var obj = {
             path: scribanFile.replace(/\\/g, '/'),
@@ -41,52 +42,23 @@ function getPayload(variantRootPath) {
     return streams;
 }
 
-function isFileEmpty(filePath) {
-    return fs.statSync(filePath).size === 0;
-}
+module.exports = async (renderingVariantsRootPath, filePath, context) => {
+    const relativeRenderingVariantsRootPath = path.relative(global.rootPath, renderingVariantsRootPath).replace(/\\/g,'/');
+    try {
+        if (!relativeRenderingVariantsRootPath.endsWith('/-/scriban')) {
+            throw new Error({ message: `'metadata.json', rendering variants and .scriban files MUST be in a folder '.../-/scriban'` });
+        }
+        const url = `${context.server}${updateScribanPath}?user=${context.user.login}&password=${context.user.password}&path=${filePath}`;
+        const form = new FormData();
+        form.append('streams', JSON.stringify(getPayload(renderingVariantsRootPath)));
+        form.append('metadata', JSON.stringify(JSON.parse(fs.readFileSync(path.resolve(renderingVariantsRootPath, 'metadata.json')))));
 
-module.exports = function (filePath, server, login, password) {
-    if (isFileEmpty(filePath)) {
-        console.log(`Scriban import for '${filePath}' failed because file is empty`.red);
-        return;
+        await got.post(url, { rejectUnauthorized: false, body: form });
+        console.log(`Scriban import was successful for Scriban files in the folder '${relativeRenderingVariantsRootPath}'!`.green);
+    } catch(error) {
+        console.log(`Scriban import failed for Scriban files in the folder '${relativeRenderingVariantsRootPath}': ${error.message}`.red);
+        if (error.response) {
+            console.log(`Status code: ${error.response.statusCode}, status message: ${error.response.statusMessage}`.red);
+        }
     }
-    const metadataFilePath = findUp.sync('metadata.json', { cwd: path.dirname(filePath) });
-    if (!metadataFilePath) {
-        console.log(`Scriban import for '${filePath}' failed because a parent folder should contain the file 'metadata.json' specifying the SXA site to upload to in the format {"siteId":"{F5AE341E-0C2E-44F8-8AD6-765DC311F57E}","database":"master"}`.red);
-        return;
-    }
-
-    const variantRootPath = path.dirname(metadataFilePath);
-
-    const relativeVariantRootPath = path.relative(global.rootPath, variantRootPath).replace(/\\/g,'/');
-    if (!relativeVariantRootPath.endsWith('/-/scriban')) {
-        console.log(`Scriban import for '${filePath}' failed because 'metadata.json', redering variants and .scriban files MUST be in a folder '.../-/scriban'`.red);
-        return;
-    }
-    const url = `${server}${updateScribanPath}?user=${login}&password=${password}&path=${filePath}`;
-    var formData = {
-        streams: JSON.stringify(getPayload(variantRootPath)),
-        metadata: JSON.stringify(JSON.parse(fs.readFileSync(metadataFilePath)))
-    };
-
-    return new Promise((resolve, reject) => {
-        setTimeout(function () { resolve(); }, 200);
-
-        var a = request.post({
-            url: url,
-            formData: formData,
-            agentOptions: {
-                rejectUnauthorized: false
-            }
-        }, function (err, httpResponse, body) {
-            if (err) {
-                console.log(`Scriban import failed for Scriban files in the folder '${relativeVariantRootPath}': ${err}`.red);
-            } else if (httpResponse.statusCode !== 200) {
-                console.log(`Scriban import failed for Scriban files in the folder '${relativeVariantRootPath}'`.red);
-                console.log(`Status code: ${httpResponse.statusCode}, status message: ${httpResponse.statusMessage}`.red);
-            } else {
-                console.log(`Scriban import was successful for Scriban files in the folder '${relativeVariantRootPath}'!`.green);
-            }
-        });
-    });
 }

@@ -2,7 +2,6 @@
 <h2>Item properties</h2>
 <h3> This is <b>i_item.name:</b> {{i_item.name}}</h3>
 <p><b>i_home:</b> {{i_home}}</p>
-
 {{if i_datasource != null}}
 <p><b>i_datasource:</b> {{i_datasource}}</p>
 <p><b>i_datasource.name:</b> {{i_datasource.name}}</p>
