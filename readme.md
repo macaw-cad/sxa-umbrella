@@ -7,11 +7,11 @@ SXA Umbrella provides the project structure and tooling to optimize the front-en
 
 # Introduction
 
-The roots of SXA Umbrella lie in the [SXACLI-enhancements]() project where we embraced the SXA CLI tooling provided by Sitecore that provided a developer-first approach for our front-end developers in SXA development. The out-of-the-box SXA CLI functionality was insufficient for our development workflow so we extended it with an extensive set of additional functionality to support the team development cycle. The SXACLI-enhancement project was built on top of the code-base of SXA CLI and was limited to handle a single SXA theme and the creation of rendering variants using Scriban for a single SXA site. This approach was too limited for our SXA projects, so we decided to do a complete rewrite of the code-base to support the creation of multiple **themes**, **base themes**, **theme extensions**, **grids**, and **rendering variant** collections for multiple sites (for example a shared site and multiple other sites). 
+The roots of SXA Umbrella lie in the [SXACLI-enhancements](https://github.com/macaw-interactive/SXACLI-enhancements) project where we embraced the SXA CLI tooling provided by Sitecore that provided a developer-first approach for our front-end developers in SXA development. Because the out-of-the-box SXA CLI functionality was insufficient for our development workflow we extended it with an extensive set of additional functionality to support the team development cycle. The SXACLI-enhancement project was built on top of the code-base of SXA CLI and was limited to handle a single SXA theme and the creation of rendering variants using Scriban for a single SXA site. This approach was too limited for our SXA projects, so we decided to do a complete rewrite of the code-base to support the creation of multiple **themes**, **base themes**, **theme extensions**, **grids**, and **rendering variant** collections for multiple sites (for example a shared site and multiple other sites).
 
 # SXA Umbrella enhancements over standard SXA CLI
 
-The out-of-the-box SXA CLI is a bit limited. It only supports a single gulp task, this task sync's all changes made in the project to Sitecore. So only if you change something it will be deployed to Sitecore. in SXA Umbrella we provide a huge set of enhanced features
+The out-of-the-box SXA CLI is a bit limited. It only supports a single gulp task, this task sync's all changes made in the project to Sitecore. So only if you change something it will be deployed to Sitecore. in SXA Umbrella we provide a huge set of enhanced features:
 
 ## Support for a team development cycle
     
@@ -31,16 +31,16 @@ Built from the ground up using modern front-end tooling, but standing on the sho
 
 ## Webpack compatible SASS
   
-For modern front-end development, we need a bundler for the creation of JavaScript and CSS bundles. Webpack is a good bundler that we use in SXA Umbrella. The problem is that the default Sitecore theme code as delivered in the NPM module `sxa/Theme`, and copied into the project by SXA CLI, is not Webpack compatible due to non-standard SASS language constructs used in the code-base (wildcard imports). SXA Umbrella provides an NPM package `sxa-defaulttheme` in the `local_modules` where the issues are fixed ad the default provided the is turned into a Webpack compatible code-base.
+For modern front-end development, we need a bundler for the creation of JavaScript and CSS bundles. Webpack is a good and modern bundler that we use in SXA Umbrella. The problem is that the default Sitecore theme code as delivered in the NPM module `@sxa/Theme`, and copied into the project by SXA CLI, is not Webpack compatible due to non-standard SASS language constructs used in the code-base (wildcard imports). SXA Umbrella provides an NPM package `sxa-defaulttheme` in the `local_modules` where the issues are fixed and the default provided theme is turned into a Webpack compatible SASS code-base.
   
 ## Webpack based scripts transpilation
 
-SXA Umbrella provides Webpack based transpilation of JavaScript, ES and TypeScript from the `src` folder into a single `scripts\pre-optimized-min.js` file to be deployed to Sitecore:
+SXA Umbrella provides Webpack based transpilation of JavaScript, ES6 and TypeScript from the `src` folder into a single `scripts\pre-optimized-min.js` file to be deployed to Sitecore:
 
 - Support for embedded sourcemaps in *development* mode for full debugging support in the browser using the source files
   ![Code debugging](docs/code_debugging.png)
 - Optimized, uglified and minified bundle with no sourcemaps in *production* mode
-- Bundle analyzer output in the `stats folder in *production* mode
+- Bundle analyzer output in the `stats` folder in *production* mode
 
 ## Webpack based styles transpilation
 
@@ -50,20 +50,25 @@ SXA Umbrella provides Webpack based transpilation of SASS from the `src` folder 
 ![Styling traceability](docs/styling_traceability.png)   
 - Optimized, minified bundle with no sourcemaps in *production* mode
 
-## Full configuration for TypeScript compilation
+## Full configuration for TypeScript transpilation
 
 [TypeScript - JavaScript that scales](https://www.typescriptlang.org/). The tag-line on the TypeScript site says it all. When working in a team (even a team of one) type-checking is an invaluable tool to prevent issues that can be prevented easily by a computer. SXA Umbrella comes with batteries included by providing an NPM package `sxa-styles` in the `local_modules` providing the TypeScript types for the XA library to build Sitecore SXA compatible components the SXA way
 
+## Full configuration for ES6 transpilation
+
+For the JavaScript developers: use the latest ES6 language features that get transpiled into the rusty JavaScript 5 that all browsers understand.
+
 ## Minimal configuration
 
-The configuration for SXA Umbrella is as minimal as possible due to convention over configuration. The folder structure provides information about what should be deployed where. We need to configure things like:
-- The target Sitecore server and credentials for deployment (config/config.json)
-- Per rendering variant collection the GUID of the site to deploy to
-- Per theme (base theme, theme, extension theme, grid) we need an entry in the Webpack configuration 
+The configuration for SXA Umbrella is as minimal as possible due to convention over configuration where possible. The folder structure provides information about what should be deployed where, but we need to configure things like:
+- The target Sitecore server and credentials for deployment (`config/config.json`)
+- Per rendering variant collection the GUID of the site to deploy to (`Rendering Variants/**/metadata.json`)
+- The files to include/exclude for cleaning, upload and distribution of themes and grids (`config/gulp.config.js`) 
+- Per theme (base theme, theme, extension theme, grid) we need an entry in the Webpack configuration (`config/webpack.config.js`)
 
 ## Full support for debugging of the tooling
 
-The tooling provided by SXA Umbrella is a starting point for your project. You probably want to extens the NPM scripts, the Gulp tasks and the Webpack configuration. SXA Umbrella provides all the required configurations to debug the tooling in Visual Studio Code by providing the a `launch.json` file in the `.vscode` folder with the following debug configurations:
+The tooling provided by SXA Umbrella is a starting point for your project. You probably want to extend the NPM scripts, the Gulp tasks and the Webpack configuration. SXA Umbrella provides all the required configurations to debug the tooling in Visual Studio Code by providing a `launch.json` file in the `.vscode` folder with the following debug configurations:
 
 - Gulp: fullDeploy
 - Gulp: watch
@@ -78,7 +83,7 @@ In a few simple steps, you can get up and running with SXA Umbrella:
 2. Create a tenant `DMP` with a site `DMP Site` (DMP stands for Digital Marketing Platform) 
 3. Navigate to https://github.com/macaw-interactive/sxa-umbrella, and download a zip file with the latest code
 4. Unzip the downloaded zip file into a convenient folder for your front-end code  
-5. On the Sitecore server open `PathToInstance/Website/App_Config/Include/z.Feature.Overrides` (in previous version of Sitecore it can be `PathToInstance/Website/App_Config/Include/Feature`) folder and remove `.disabled` from the `z.SPE.Sync.Enabler.Gulp.config.disabled` file
+5. On the Sitecore server open `PathToInstance/Website/App_Config/Include/z.Feature.Overrides` (in previous version of Sitecore it can be `<PathToInstance/Website>/App_Config/Include/Feature`) folder and remove `.disabled` from the `z.SPE.Sync.Enabler.Gulp.config.disabled` file
 6. Switch to the front-end code folder
 7. Update the `config/config.json` file to reflect your Sitecore server and credentials
 8. Open the front-end code folder with the command-line
@@ -91,13 +96,13 @@ In a few simple steps, you can get up and running with SXA Umbrella:
 The SXA Umbrella front-end folder contains two important folders for your front-end work:
 
 - **Media Library** - for all themes and grids related stuff
-- **Rendering Variants** - for multiple rendering variant collections
+- **Rendering Variants** - for multiple rendering variant collections (one collection per site)
 
 ## Media Library
 
 The `Media Library` folder follows the structure of Sitecore. Add subfolders for **Extension Themes**, **Base Themes** and **Themes** as required. **Grids** should live is the `Feature` folder (e.g. `Feature/DMP/DMP Bootstrap 4`).
 
-Within `Themes` you can directly create a theme folder (e.g. `Themes/DMP`), of organize new themes in a `Tenant/Site/Theme` structure.
+Within `Themes` you can directly create a theme folder (e.g. `Themes/DMP`), of organize new themes in a `Tenant/Site/Theme` structure as Sitecore when you select to create a new theme on creation of a new site.
 
 ```
 Media Library
@@ -149,7 +154,7 @@ Media Library
 
 ## Rendering Variants
 
-The `Rendering Variants` folder can contain one or more sub-folders for rendering variant collections. Each collection belongs to a site, and will be deployed to the folder `<site>/Presentation/Rendering Variants`. The folder needs to have sub-folders `-/scriban` because the Scriban update end-point in Sitecore requires this in the file path.
+The `Rendering Variants` folder can contain one or more sub-folders for rendering variant collections. Each collection belongs to a site, and will be deployed to the folder `<tenant>/<site>/Presentation/Rendering Variants`. The folder needs to have sub-folders `-/scriban` because the Scriban update end-point in Sitecore requires this in the file path.
 
 A sample rendering variants collection is provided for a site `DMP Site`:
 
@@ -164,7 +169,7 @@ Rendering Variants
             └── metadata.json
 ```
 
-The `metadata.json` file configures the id of the site where the rendering variants are deployed to, e.g.:
+The `metadata.json` file configures the `siteId` of the site where the rendering variants are deployed to, e.g.:
 
 ```json
 {
@@ -173,21 +178,19 @@ The `metadata.json` file configures the id of the site where the rendering varia
 }
 ```
 
-
 # NPM Scripts to support team development workflow
 
-The NPM scripts are provided for the optimal team development workflow.
+The following NPM scripts are provided for the optimal team development workflow:
 
 ## build-deploy-watch
 
 Execute `npm run build-deploy-watch` to build everything, deploy to Sitecore and go into watch mode. This is the first thing to do after a pull request to get the latest changes made by the team, and make sure that these changes are reflected on the Sitecore server used for your daily development work. The JavaScript and CSS bundles are build in *development* mode and include sourcemaps for optimal support for debugging.
 
-Make sure that the Visual Studio solution containing Possible Unicorn items to be synchronized is built and deployed first (if applicable).
+Make sure that the Visual Studio solution containing possible Unicorn items to be synchronized is built and deployed first (if applicable).
 
 ## watch
 
-Execute `npm run watch` to go directly into watch mode. You can do this if you start your work without getting the changes made by your team first to get. You get a quick start of the day and can continue with your work. The JavaScript and CSS bundles are build in *development* mode and include sourcemaps for optimal support for debugging.
-
+Execute `npm run watch` to go directly into watch mode. You can do this if you start your work without getting the changes made by your team first. You get a quick start of the day and can continue with your work. The JavaScript and CSS bundles are built-in *development* mode and include sourcemaps for optimal support for debugging.
 
 ## build:dist
 
@@ -199,9 +202,9 @@ Bundle analyzer output is written to the `stats folder to give you more insights
 
 ![Bundle Analyzer](docs/BundleAnalyzer.png)
 
-Note that during this build the resulting artifacts for themes and grids will end-up in the `dist` folder in the root of the front-end folder. These artifacts should be part of the deployment package for Sitecore together with a custom script to deploy the files as items in Sitecore. Preferably don't deploy these files using unicorn, because the build of JavaScript and CSS bundles should be executed on s build server
+Note that during this build the resulting artifacts for themes and grids will end-up in the `dist` folder located in the root of the front-end folder. These artifacts should be part of the deployment package for Sitecore together with a custom script to deploy the files as items in Sitecore. Preferably don't deploy these files using unicorn, because the build of JavaScript and CSS bundles should be executed on a build server, not on a developer his local machine.
 
-The rendering variant items should be deployed using Unicorn, because these files need to be deployed to Sitecore "as is", no build procvess is needed.
+The Scriban rendering variant items should be deployed using Unicorn, because these files need to be deployed to Sitecore "as is". For Scriban files no build process is needed.
 
 ## Other NPM scripts
 
@@ -211,20 +214,22 @@ Note that there are many more "internal" npm scripts available in the `package.j
 
 There is an example of a TypeScript component written the SXA way at `sources/components/xaclock`.
 
-TypeScript types for SXA way of writing components is available as  `sxa-types/xa`.
+TypeScript types for the SXA way of writing components is available at `sxa-types/xa`.
 
-*More information will be added for building components the SXA way*
+*In the future more information will be added for building components the SXA way*
    
 # Creating a custom theme
 
-We tried to minimize the modification of the default provided theme code. A copy of the theme code provided by Sitecore lives in the local module `local_modules/sxa-defaulttheme`. This code is based of the code provided in the nuget package `@sxa/Theme` and provides the SASS styling for all provided components. The SASS code is copied and modified by a gulp task as provided in the `sxa-defaulttheme` package. This code can be regenerated if required, for example when an updated NPM package with fixes in the theme code comes out. The theme code is made compatible for consumption by Webpack.
+We tried to minimize the modification of the default provided theme code. A copy of the theme code provided by Sitecore lives in the local module `local_modules/sxa-defaulttheme`. This code is based on the code provided in the NPM package `@sxa/Theme` and provides the SASS styling for all provided components. The SASS code is copied and modified by a gulp task as provided in the `sxa-defaulttheme` package. This code can be regenerated if required, for example when an updated NPM package with fixes in the theme code comes out. The theme code is made compatible for consumption by Webpack.
 
 Our philosophy is to not touch the SASS code at all as provided in the `sxa-defaulttheme` package, but create overrides in the theme folder.
 
-- The `images` and `fonts` are copied over from the `sxa-defaulttheme` package
-- The root of the SASS is in the file `<theme>/src/index.scss`, this file is included by `<theme>/src/index.ts` and the extraction of the CSS bundle is handled by webpack.
-- Overrides on the provided SASS for the theme should be done in the file `<theme>/src/theme.scss`. In this way it is easy to create multiple themes from the same SASS codebase by just providing different `theme.sass` files in the transpilation.
-- The file `<theme>/index.ts` is the entry point of all code (TypeScript, ES, JavaScript, SASS)
+In the provided example theme `Media Library\Themes\DMP` we did execute the following steps:
+
+- The `images` and `fonts` are copied over from the `sxa-defaulttheme` local module
+- The root of the SASS is in the file `<theme>/src/index.scss`, this file is included by `<theme>/src/index.ts` and the extraction of the CSS bundle is handled by Webpack
+- Overrides on the provided SASS for the theme are be done in the file `<theme>/src/theme.scss`. In this way it is easy to create multiple themes from the same default SASS code-base by just providing different `theme.sass` files in the transpilation
+- The file `<theme>/index.ts` is the entry point of all code (TypeScript, ES6, JavaScript, SASS)
 
 For each theme or grid an entry must be provided in the `config/webpack.config.js` file. We currently have the following configuration for the `DMP` theme and the `DMP Bootstrap 4` grid:
 
@@ -256,14 +261,15 @@ const customEntryOutputConfigurations = {
 };
 ```
 
-This configuration can be modifed and extended for additional themes and grids.
+This configuration can be modified and extended for additional themes and grids.
 
 # Creating a custom grid
 
-SXA Umbrella assumes the use of **Bootstrap 4** as the basis for new grids. The SASS bootstrap code is added as an NPM package and a new variation of the **Bootstrap 4** grid can be easily created by referencing the SASS grid files from the NPM package.
+Provided SXA Umbrella configuration assumes the use of **Bootstrap 4** as the basis for new grids, but this can be any grid as is suitable for your project. The SASS bootstrap 4 code is added as an NPM package and a new variation of the **Bootstrap 4** grid can be easily created by referencing the SASS grid files from the NPM package.
 
-An example grid `DMP Bootstrap 4``` is provided in the SXA Umbrella code base.
+The code for an example grid setup `DMP Bootstrap 4``` is provided in the SXA Umbrella code-base. This grid setup works perfectly in combination with the Bootstrap SXA Grid provided by my colleague [Barend Emmerzaal](https://barendemmerzaal.com/) as explained in the video [Custom Sitecore SXA Bootstrap Grid implementation](https://www.youtube.com/watch?v=vMbr4OdJ2Xg). The grid installation package is available in the [download](https://barendemmerzaal.com/downloads.html) section of his website.
 
+The code structure for the grid is as follows:
 
 ```
 Media Library
@@ -300,7 +306,7 @@ In this section some tips & tricks to optimize your development with SXA Umbrell
 
 # Maintain your .gitignore file
 
-Exclude the `scripts` and `styles` folders from your themes. The first version of SXA Umbrella tried to exclude these folders with a wildcard pattern, but this also excluded these folders from the `src` folder in themes. This broke legacy themes, where all theme SASS code is copied to the `src/theme` folder including a `styles` folder which was erroneously excluded. Specify the complete folder paths. Good Visual Studio Code extension to help you with this is [gitignore](https://marketplace.visualstudio.com/items?itemName=michelemelluso.gitignore). You cvan now right-click on the folders to exclude
+Exclude the `scripts` and `styles` folders from your themes. The first version of SXA Umbrella tried to exclude these folders with a wildcard pattern, but this also excluded these folders from the `src` folder in themes. This broke legacy themes, where all theme SASS code is copied to the `src/theme` folder including a `styles` folder which was erroneously excluded. Specify the complete folder paths in your `.gitignore` file. A good Visual Studio Code extension to help you with this is [gitignore](https://marketplace.visualstudio.com/items?itemName=michelemelluso.gitignore). With this package installed you can right-click on the folders to exclude and add it to the `.gitignore` file.
 
 # Frequently asked questions
 
@@ -312,18 +318,17 @@ It should be easy for tools to read the configuration settings, also for non-Jav
 
 The file `config\webpack.config.js` contains multiple output configurations as shown in the [multi-compiler](https://github.com/webpack/webpack/tree/master/examples/multi-compiler) example. We could easily automate the generation of the required configurations if all themes needed to be compiled alike, but we see potential cases where a different configuration is required. A good example is when a theme contains additions output configurations for a React bundle. 
 
-### Why does a rendering variants collection for a web site to be in a folder `-/scriban`?
+### Why does a rendering variants need to be in a folder `-/scriban`?
 
-The used end-point for uploading Scriban files checks the Scriban file paths for the occurence of the string `-/scriban` to determine the relative path within the folder `<sites>/Presentation/Rendering Variants` folder to deploy to.
+The used end-point for uploading Scriban files checks the Scriban file paths for the occurrence of the string `-/scriban` to determine the relative path within the folder `<sites>/Presentation/Rendering Variants` folder to deploy to.
 
 ### Can the front-end folder be partitioned into multiple deployment packages?
 
-When you are working with multiple teams on separate solutions for a Sitecore environment that should be deployed separately, there is no reason why you can't have multiple solutions with a front-end folder containing the SXA Umbrella setup.
-
+When you are working with multiple teams on separate solutions for a Sitecore environment that should be deployed separately, there is no reason why you can't have multiple solutions each with a front-end folder containing the SXA Umbrella setup.
 
 ### Can the `sxa-defaulttheme` be recreated?
 
-The `sxa-defaulttheme` local module contains a Gulp task `create-fixed-defaulttheme-sass-for-webpack` that can be executed by the NPM script `build` to copy and fix the SASS code for the default theme as provided by Sitecore in the npm package @sca/Theme by expanding wildcard imports to the actual imports, otherwise, the sass can't be transpiled by webpack. Recreation is required in the following cases:
+The `sxa-defaulttheme` local module contains a Gulp task `create-fixed-defaulttheme-sass-for-webpack` that can be executed by the NPM script `build` to copy and fix the SASS code for the default theme as provided by Sitecore in the npm package @sca/Theme. This task resolves wildcard imports to the actual imports and fixes import paths to fix the SASS for consumption by Webpack. Regeneration of the fixed SASS code is required in the following cases:
 
 - Sitecore provides an updated version of the default theme by updating the @sxa/theme NPM package (currently version 1.0.1)
 - Modifications must be made to the flags sprite (resulting image `sprite-flag.png` is copied over to the `DMP` theme)
