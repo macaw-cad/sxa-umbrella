@@ -80,16 +80,23 @@ The tooling provided by SXA Umbrella is a starting point for your project. You p
 In a few simple steps, you can get up and running with SXA Umbrella:
 
 1. Get a Sitecore 9.3 environment with SXA enabled
-2. Create a tenant `DMP` with a site `DMP Site` (DMP stands for Digital Marketing Platform) 
-3. Navigate to https://github.com/macaw-interactive/sxa-umbrella, and download a zip file with the latest code
-4. Unzip the downloaded zip file into a convenient folder for your front-end code  
-5. On the Sitecore server open `PathToInstance/Website/App_Config/Include/z.Feature.Overrides` (in previous version of Sitecore it can be `<PathToInstance/Website>/App_Config/Include/Feature`) folder and remove `.disabled` from the `z.SPE.Sync.Enabler.Gulp.config.disabled` file
-6. Switch to the front-end code folder
-7. Update the `config/config.json` file to reflect your Sitecore server and credentials
-8. Open the front-end code folder with the command-line
-9. Run `npm install` (*node.js and npm should be already installed*)
-10. Configure the `metadata.json` file with the GUID of the site to deploy to
-11. Run `npm run build-deploy-watch` to kickstart the whole process
+2. Create an empty theme `DMP`:
+   1. Right-click on `/sitecore/media library/Themes`: Insert > Insert from template
+   2. Select `/sitecore/templates/Foundation/Experience Accelerator/Theming/Theme`
+3. Install the Grid package `DMP Bootstrap 4 Grid-1.0.zip` as show-cased by [Barend Emmerzaal](https://barendemmerzaal.com/) in the video [Custom Sitecore SXA Bootstrap Grid implementation](https://www.youtube.com/watch?v=vMbr4OdJ2Xg) 
+4. Create a tenant `DMP Tenant` (DMP stands for Digital Marketing Platform) 
+5. Create a site `DMP Site` with the theme `Themes/DMP` and grid `DMP Bootstrap 4`
+6. Navigate to https://github.com/macaw-interactive/sxa-umbrella, and download a zip file with the latest code
+7. Unzip the downloaded zip file into a convenient folder for your front-end code  
+8. On the Sitecore server open `<PathToInstance/Website>/App_Config/Include/z.Feature.Overrides` (in previous version of Sitecore it can be `<PathToInstance/Website>/App_Config/Include/Feature`) folder and remove `.disabled` from the `z.SPE.Sync.Enabler.Gulp.config.disabled` file.
+   - If you work with a normal installation, it is in a folder like `C:\inetpub\wwwroot\UmbrellaCorpsc.dev.local`
+   - If you use Docker I'm not sure where to find the file (please let me know - Docker will not work on my machine!)
+9. Switch to the front-end code folder
+10. Update the `config/config.json` file to reflect your Sitecore server and credentials
+11. Open the front-end code folder with the command-line
+12. Run `npm install` (*node.js and npm should be already installed*)
+13. Configure the `metadata.json` file with the GUID of the site to deploy to (select `/sitecore/content/DMP Tenant/DMP Site` and copy the `Item ID`)
+14. Run `npm run build-deploy-watch` to kickstart the whole process
 
 # SXA Umbrella folder structure
 
@@ -309,6 +316,19 @@ In this section some tips & tricks to optimize your development with SXA Umbrell
 Exclude the `scripts` and `styles` folders from your themes. The first version of SXA Umbrella tried to exclude these folders with a wildcard pattern, but this also excluded these folders from the `src` folder in themes. This broke legacy themes, where all theme SASS code is copied to the `src/theme` folder including a `styles` folder which was erroneously excluded. Specify the complete folder paths in your `.gitignore` file. A good Visual Studio Code extension to help you with this is [gitignore](https://marketplace.visualstudio.com/items?itemName=michelemelluso.gitignore). With this package installed you can right-click on the folders to exclude and add it to the `.gitignore` file.
 
 # Frequently asked questions
+
+### I have an existing, heavily modified theme - can I use SXA Umbrella?
+
+Absolutely! As an example of a project where this is the case I created the project [
+SXA.Styleguide.Frontend.SXAUmbrella](https://github.com/macaw-interactive/SXA.Styleguide.Frontend.SXAUmbrella/blob/master/README.md), a rewrite of the front-end of the great [SXA Styleguide](https://www.markvanaalst.com/blog/sxa-styleguide/introducing-the-sxa-styleguide/) project by [Mark van Aalst](https://www.markvanaalst.com/). The repository contains a folder [legacy](https://github.com/macaw-interactive/SXA.Styleguide.Frontend.SXAUmbrella/tree/master/legacy) with the tooling to convert the SASS of a 'legacy' theme into a theme with the SASS code fixed for consumption by Webpack.
+
+1. create a folder `legacy` in your project
+2. copy you legacy theme SASS into the folder `theme/sass`
+3. create the theme folder at the correct location in the `Media Library` folder
+4. configure this folder in the variable `destinationTheme` in the file `package.json`
+5. execute `npm install` in the `legacy` folder
+6. execute `npm run fix` in the legacy folder
+7. create the files [index.ts](https://github.com/macaw-interactive/SXA.Styleguide.Frontend.SXAUmbrella/blob/master/Media%20Library/Themes/Sitecore/Styleguide/Styleguide/src/index.ts) and [index.scss](https://github.com/macaw-interactive/SXA.Styleguide.Frontend.SXAUmbrella/blob/master/Media%20Library/Themes/Sitecore/Styleguide/Styleguide/src/index.scss) as suitable for your specific theme
 
 ### Why is the `config/config.json` file a JSON file and not JavaScript?
 
