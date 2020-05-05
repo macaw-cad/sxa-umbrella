@@ -90,7 +90,7 @@ const watch = () => {
 const copyToDist = (done) => {
   gulp
     .src(copyToDistGlob)
-    .pipe(gulp.dest('../dist'));
+    .pipe(gulp.dest('../dist/Media Library'));
   done();
 }
 
