@@ -353,9 +353,20 @@ The `sxa-defaulttheme` local module contains a Gulp task `create-fixed-defaultth
 - Sitecore provides an updated version of the default theme by updating the @sxa/theme NPM package (currently version 1.0.1)
 - Modifications must be made to the flags sprite (resulting image `sprite-flag.png` is copied over to the `DMP` theme)
 
-# Blog posts about Sitecore SXA CLI
+# Related blog posts 
 
-The blog posts below contain some important information to get the initial configuration of your system in good shape to start working with Sitecore SXA CLI:
+Below some blog posts regarding SXA CLI and SXA Umbrella.
+
+## Posts about SXA Umbrella
+
+The blog posts below are related to SXA Umbrella:
+
+- [From SXACLI to enhancements to SXA Umbrella](https://www.sergevandenoever.nl/From_SXACLI_to_enhancements_to_SXA_Umbrella/)
+
+
+## Posts about Sitecore SXA CLI
+
+The blog posts below contain some information about initial research into SXA CLI:
 
 - [Sitecore 9.3 - create a custom theme for SXA using SXA CLI](https://www.sergevandenoever.nl/sitecore-93-custom-theme-with-SXA-CLI/)
 - [Sitecore 9.3 SXA CLI - get item fields](https://www.sergevandenoever.nl/Sitecore-93-SXA-CLI-GetItemFields/)
