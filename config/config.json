@@ -1,4 +1,5 @@
 {
+    "server2": "https://sergesc.dev.local",
     "server": "https://umbrellacorpsc.dev.local",
     "user": { 
         "login": "sitecore\\admin", 

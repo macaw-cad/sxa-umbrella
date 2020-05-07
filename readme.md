@@ -309,7 +309,10 @@ $grid-gutter-width: 80px !default;
 
 # SXA Umbrella on Steroids - remoting!
 
-The next step is to enable PowerShell remoting so more powerful tooling is possible.
+The next step is to enable PowerShell remoting so more powerful tooling is possible. Currently two tools are available based on PowerShell remoting:
+
+- `.\tools\get-itemfields.ps1` - to get the internal field names of a Sitecore item
+- `npm run validate` - validate the configueration of Sitecore against the code base
 
 ## Enable PowerShell remoting for your local dev machine
 
@@ -374,6 +377,20 @@ Execute the script:
 
 to get information of the internal names of the fields of an item.
 
+## npm run validate
+
+A powerful validation of the current front-end code-base against your Sitecore environment. The validation uses PowerShell remoting to compare the state of the code against available Sitecore items. The following validations are executed:
+
+### Rendering Variants
+
+The `Rendering Variants` folder can contain rendering variants with Scriban files for multiple sites. We call the set of rendering variants for sites *rendering variant collections*. Each collection lives in a folder with the same name as the site it will be deployed to. The following validations are executed:
+
+- The `Rendering Variants` folder contains no other files than the `metadata.json` and `*.scriban` files
+- The `SiteId` as specified in the `manifest.json` exists as an item in Sitecore with the same name as the site folder, and the template of the item is 'Site'
+- A rendering variants collection is located in a folder `<siteName>/-/scriban`
+- All renderings exist with the same name in Sitecore, and the template of the corresponding items is `Variants`
+- All rendering variants in the rendering folder exist  with the same name in Sitecore, and the template of the corresponding items is `Variant Definition`
+
 # Tips & tricks
 
 In this section some tips & tricks to optimize your development with SXA Umbrella.
@@ -419,6 +436,10 @@ The `sxa-defaulttheme` local module contains a Gulp task `create-fixed-defaultth
 
 - Sitecore provides an updated version of the default theme by updating the @sxa/theme NPM package (currently version 1.0.1)
 - Modifications must be made to the flags sprite (resulting image `sprite-flag.png` is copied over to the `DMP` theme)
+
+### Can SXA Umbrella be used on older versions of Sitecore SXA?
+
+Although Sitecore SXA is developed with Sitecore 9.3 SXA and up in mind, there is no reason why (part of) the tooling would not work on older versions of Sitecore SXA. SXA Umbrella uses the endpoints of Creative Exchange Live which were available far before Sitecore 9.3. The Rendering variants using Scriban files will **not** work on older vefrsions of Sitecore, because this feature was introduced in Sitecore 9.3 SXA.
 
 # Related blog posts 
 

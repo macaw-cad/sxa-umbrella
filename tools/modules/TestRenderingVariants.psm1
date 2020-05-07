@@ -75,7 +75,7 @@ function Test-RemoteExistRenderingVariantCollections {
 
     Invoke-RemoteScriptTestOutput -Session $session -Arguments $arguments -ScriptBlock {
         $params.renderingVariantCollections | ForEach-Object {
-            $siteItem = Get-Item -Path master: -ID $_.SiteId
+            $siteItem = Get-Item -Path master: -ID $_.SiteId -ErrorAction Ignore
             if ($null -eq $siteItem) {
                 Write-Output "WARNING: Sitecore site with id='$($_.SiteId)' as specified in '$($_.SiteName)/-/scriban/metadata.json' not found"
             } else {
@@ -90,7 +90,7 @@ function Test-RemoteExistRenderingVariantCollections {
             $_.Renderings | ForEach-Object {
                 $renderingItemPath = "$($siteItem.PSPath)\Presentation\Rendering Variants\$($_.Name)"
                 Write-Output "VERBOSE: Validating rendering '$renderingItemPath'"
-                $renderingItem = Get-Item -Path $renderingItemPath
+                $renderingItem = Get-Item -Path $renderingItemPath -ErrorAction Ignore
                 # $renderingItem
                 if ($null -eq $renderingItem) {
                     Write-Output "WARNING: Missing expected Sitecore item '$renderingItemPath' based on template 'Variants'"
@@ -101,10 +101,10 @@ function Test-RemoteExistRenderingVariantCollections {
                     $_.Variants | ForEach-Object {
                         $renderingVariantItemPath = "$renderingItemPath\$_"
                         Write-Output "VERBOSE: Validating rendering variant '$renderingVariantItemPath'"
-                        $renderingVariantItem = Get-Item -Path $renderingVariantItemPath
+                        $renderingVariantItem = Get-Item -Path $renderingVariantItemPath -ErrorAction Ignore
                         # $renderingVariantItem
                         if ($null -eq $renderingVariantItem) {
-                            Write-Output "WARNING: Missing expected Sitecore item '$renderingVariantItem' based on template 'Variant Definition'"
+                            Write-Output "WARNING: Missing expected Sitecore item '$renderingVariantItemPath' based on template 'Variant Definition'"
                         } else {
                             if ($renderingVariantItem.TemplateName -ne 'Variant Definition') {
                                 Write-Output "WARNING: Sitecore item '$renderingVariantItemPath' is not based based on template 'Variant Definition'"
