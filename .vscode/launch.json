@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "PowerShell: Validate",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/tools/validate.ps1",
+            "cwd": "${workspaceFolder}"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Gulp: fullDeploy",

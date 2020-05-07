@@ -307,6 +307,73 @@ $grid-gutter-width: 80px !default;
 @import "~bootstrap/scss/grid.scss";
 ```
 
+# SXA Umbrella on Steroids - remoting!
+
+The next step is to enable PowerShell remoting so more powerful tooling is possible.
+
+## Enable PowerShell remoting for your local dev machine
+
+To enable PowerShell remoting for your local dev machine the easiest approach is described in the blog post [ShieldsDown.config for Sitecore PowerShell developers](https://alan-null.github.io/2017/01/spe-dev-config). Execute the following steps:
+
+1. Create folder `<PathToInstance/Website>/App_Config/Include/zzz`
+2. Create file `<PathToInstance/Website>/App_Config/Include/zzz/zzz_spe_shieldsdown.config`
+3. Copy the content described in the above linked post to this file:
+```xml
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+    <powershell>
+      <services>
+        <remoting>
+          <patch:attribute name="enabled">true</patch:attribute>
+          <authorization>
+            <add Permission="Allow" IdentityType="User" Identity="sitecore\admin" />
+          </authorization>
+        </remoting>
+        <restfulv2>
+          <patch:attribute name="enabled">true</patch:attribute>
+        </restfulv2>
+      </services>
+      <userAccountControl>
+        <gates>
+          <gate name="ISE">
+              <patch:delete/>
+          </gate>
+          <gate name="Console">
+              <patch:delete/>
+          </gate>
+          <gate name="ItemSave">
+              <patch:delete/>
+          </gate>
+          <gate name="ISE" token="Permissive"/>
+          <gate name="Console" token="Permissive"/>
+          <gate name="ItemSave" token="Permissive"/>
+        </gates>
+        <tokens>
+          <token name="Permissive" expiration="00:00:00" elevationAction="Allow"/>
+        </tokens>
+      </userAccountControl>
+    </powershell>
+  </sitecore>
+</configuration>
+```
+4. Open console window and do an `iisreset`
+5. Check the resulting configuration on the url `https://<your-sitecore-server>/sitecore/admin/showconfig.aspx` for the following `remoting` configuration:
+```xml
+<remoting requireSecureConnection="false" enabled="true">
+  <authorization>
+    <add Permission="Allow" IdentityType="User" Identity="sitecore\admin" patch:source="zzz_spe_shieldsdown.config"/>
+  </authorization>
+</remoting>
+```
+## get-itemfields.ps1
+
+When writing Scriban files it is handy to know the internal names of the fields of a Sitecore item.
+Execute the script:
+
+`.\tools\get-itemfields.ps1 <Sitecore-item-path>` 
+
+to get information of the internal names of the fields of an item.
+
 # Tips & tricks
 
 In this section some tips & tricks to optimize your development with SXA Umbrella.
