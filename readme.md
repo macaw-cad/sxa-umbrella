@@ -1,7 +1,7 @@
 <div align="center">
 <h1>SXA Umbrella</h1>
 <p>
-SXA Umbrella provides the project structure and tooling to optimize the front-end team development workflow in any Sitecore SXA project. 
+SXA Umbrella provides the project structure and tools to optimize the front-end team development workflow in any Sitecore SXA project. 
 </p>
 </div>
 
@@ -22,7 +22,7 @@ A Sitecore SXA project is team-work, so the tooling must support a typical team 
 - Start watch node for incremental deploy of changed artifacts to Sitecore
 - Commit changes to source-control
 
-## Using modern frontend tooling
+## Using modern front-end tools
 
 Built from the ground up using modern front-end tooling, but standing on the shoulders of giants: using the concepts of the SXA CLI, and the end-points provided by SXA Creative Exchange to sync changes directly to your Sitecore environment.
 
@@ -66,12 +66,17 @@ The configuration for SXA Umbrella is as minimal as possible due to convention o
 - The files to include/exclude for cleaning, upload and distribution of themes and grids (`config/gulp.config.js`) 
 - Per theme (base theme, theme, extension theme, grid) we need an entry in the Webpack configuration (`config/webpack.config.js`)
 
-## Full support for debugging of the tooling
+## Validation of source code against Sitecore server
 
-The tooling provided by SXA Umbrella is a starting point for your project. You probably want to extend the NPM scripts, the Gulp tasks and the Webpack configuration. SXA Umbrella provides all the required configurations to debug the tooling in Visual Studio Code by providing a `launch.json` file in the `.vscode` folder with the following debug configurations:
+Validate the structure of your code for Rendering Variants against the Sitecore server. Give warnings if unexpected files or file structures are found, and when required items within Sitecore are missing.
+
+## Full support for debugging of the tools
+
+The tools provided by SXA Umbrella is a starting point for your project. You probably want to extend the NPM scripts, the Gulp tasks and the Webpack configuration. SXA Umbrella provides all the required configurations to debug the tooling in Visual Studio Code by providing a `launch.json` file in the `.vscode` folder with the following debug configurations:
 
 - Gulp: fullDeploy
 - Gulp: watch
+- PowerShell: validate
 - Webpack: development
 - Webpack: production
 

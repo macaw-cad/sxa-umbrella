@@ -44,7 +44,7 @@
 <p><b>o_pagemode.is_preview:</b> {{o_pagemode.is_preview}}</p>
 <p><b>o_pagemode.is_normal:</b> {{o_pagemode.is_normal}}</p>
 
-<h2>Some basic Scribban functions</h2>
+<h2>Some basic Scriban functions</h2>
 <p><b>sc_link using current item to render link</b></p>
 {{if i_datasource != null}}
 <a href="{{ sc_link i_datasource }}">{{ i_datasource.display_name }}</a>
