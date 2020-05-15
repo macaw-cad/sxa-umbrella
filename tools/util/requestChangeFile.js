@@ -6,7 +6,7 @@ require('colors');
 const uploadScriptPath = '/sitecore modules/PowerShell/Services/RemoteScriptCall.ashx';
 
 module.exports = async (filePath, destinationPath, context) => {
-    const url = `${context.server}${uploadScriptPath}?user=${context.user.login}&password=${context.user.password}&script=${context.destinationPath}&sc_database=master&apiVersion=media&scriptDb=master`;
+    const url = `${context.server}${uploadScriptPath}?user=${context.user.login}&password=${context.user.password}&script=${destinationPath}&sc_database=master&apiVersion=media&scriptDb=master`;
     const form = new FormData();
     form.append('file', fs.createReadStream(filePath));
 
