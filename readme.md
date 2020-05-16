@@ -114,7 +114,7 @@ The SXA Umbrella front-end folder contains two important folders for your front-
 
 The `Media Library` folder follows the structure of Sitecore. Add subfolders for **Extension Themes**, **Base Themes** and **Themes** as required. **Grids** should live is the `Feature` folder (e.g. `Feature/DMP/DMP Bootstrap 4`).
 
-Within `Themes` you can directly create a theme folder (e.g. `Themes/DMP`), of organize new themes in a `Tenant/Site/Theme` structure as Sitecore when you select to create a new theme on creation of a new site.
+Within `Themes` you can directly create a theme folder (e.g. `Themes/DMP`), or organize new themes in a `Tenant/Site/Theme` structure as Sitecore when you select to create a new theme on the creation of a new site.
 
 ```
 Media Library
@@ -317,7 +317,10 @@ $grid-gutter-width: 80px !default;
 The next step is to enable PowerShell remoting so more powerful tooling is possible. Currently two tools are available based on PowerShell remoting:
 
 - `.\tools\get-itemfields.ps1` - to get the internal field names of a Sitecore item
-- `npm run validate` - validate the configueration of Sitecore against the code base
+- `npm run validate` - validate the configuration of Sitecore against the code-base
+  - Currently only the rendering variants are validated
+- `npm run test` - execute integration tests for SXA Umbrella
+  - Currently only the build/deploy of the rendering variants are tested 
 
 ## Enable PowerShell remoting for your local dev machine
 
@@ -400,9 +403,20 @@ The `Rendering Variants` folder can contain rendering variants with Scriban file
 
 In this section some tips & tricks to optimize your development with SXA Umbrella.
 
-# Maintain your .gitignore file
+### Maintain your .gitignore file
 
 Exclude the `scripts` and `styles` folders from your themes. The first version of SXA Umbrella tried to exclude these folders with a wildcard pattern, but this also excluded these folders from the `src` folder in themes. This broke legacy themes, where all theme SASS code is copied to the `src/theme` folder including a `styles` folder which was erroneously excluded. Specify the complete folder paths in your `.gitignore` file. A good Visual Studio Code extension to help you with this is [gitignore](https://marketplace.visualstudio.com/items?itemName=michelemelluso.gitignore). With this package installed you can right-click on the folders to exclude and add it to the `.gitignore` file.
+
+### Scriban items with sub-items
+
+A Sitecore Scriban item can have a Scriban sub-item. To structure this you can do this as follows:
+
+```
+MyRenderingVariant
+├── item
+│   └── subitem.scriban
+└── item.scriban
+```
 
 # Frequently asked questions
 
@@ -444,7 +458,11 @@ The `sxa-defaulttheme` local module contains a Gulp task `create-fixed-defaultth
 
 ### Can SXA Umbrella be used on older versions of Sitecore SXA?
 
-Although Sitecore SXA is developed with Sitecore 9.3 SXA and up in mind, there is no reason why (part of) the tooling would not work on older versions of Sitecore SXA. SXA Umbrella uses the endpoints of Creative Exchange Live which were available far before Sitecore 9.3. The Rendering variants using Scriban files will **not** work on older vefrsions of Sitecore, because this feature was introduced in Sitecore 9.3 SXA.
+Although Sitecore SXA is developed with Sitecore 9.3 SXA and up in mind, there is no reason why (part of) the tooling would not work on older versions of Sitecore SXA. SXA Umbrella uses the endpoints of Creative Exchange Live which were available far before Sitecore 9.3. The Rendering variants using Scriban files will **not** work on older versions of Sitecore, because this feature was introduced in Sitecore 9.3 SXA.
+
+### Scriban import failed for Scriban files in the folder 'xyz': filePath is not defined
+
+When you create a new Scriban file which is still empty the Scriban import fails with this error. Add content to the Scriban file and this error will disappear.
 
 # Related blog posts 
 

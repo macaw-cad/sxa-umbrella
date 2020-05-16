@@ -22,7 +22,7 @@ const getScribanFiles = dir => {
             }
         }
     });
-    return results;
+    return results.sort((a, b) => a.length - b.length); // sort ascending, so Scriban items create before it's sub-items
 }
 
 const getPayload = renderingVariantsRootPath => {

@@ -1,4 +1,5 @@
-Import-Module -Name SPE
+Import-Module -Name $PSScriptRoot\ModuleManagement.psm1 -Force
+Install-ModuleIfNotInstalled -moduleName SPE -minimalVersion 6.1.0 
 
 function Invoke-RemoteScriptTestOutput {
     param(

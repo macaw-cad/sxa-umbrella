@@ -56,3 +56,8 @@
 <p><b>SampleParameter1:</b> {{ sc_parameter 'SampleParameter1' }}</p>
 <p><b>SampleParameter2:</b> {{ sc_parameter 'SampleParameter2' }}</p>
 <p><b>SampleParameter3:</b> {{ sc_parameter 'SampleParameter3' }}</p>
+
+<p>
+<h2>Execution of sub-item</h2>
+{{sc_execute i_item "subitem"}}
+</p>
