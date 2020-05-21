@@ -1,0 +1,49 @@
+{
+    "scope.version": "2",
+    "template.metadata": {
+        "label": "Expandable Pushdown",
+        "adData": {
+            "platforms": [0],
+            "networks": [1],
+            "features": [],
+            "verticals": [],
+            "adTypes": [1, 3],
+            "components": []
+        },
+        "dynamicSchema": "",
+        "dimensions": [{
+            "width": 970,
+            "height": 90,
+            "responsive": false
+        }, {
+            "width": 970,
+            "height": 180,
+            "responsive": false
+        }],
+        "usageData": {
+            "creationTimeMs": 1530230545000
+        },
+        "thumbnail": "thumbnail.svg",
+        "links": []
+    },
+    "timeline.animationMode": "proMode",
+    "viewport.width": 970,
+    "viewport.height": 90,
+    "library.openDirectories": [],
+    "library.GroupsPath": {},
+    "library.downloadedAssets": {},
+    "publish.local.location": "C:/P/GoogleWebDesignerForSitecore/GWD/",
+    "publish.local.name": "risingstar",
+    "publish.local.flatten": true,
+    "publish.local.minify": false,
+    "publish.local.inlineFiles": false,
+    "publish.local.createZip": false,
+    "publish.local.politeLoad": true,
+    "publish.local.exportMozilla": true,
+    "publish.local.exportWebkit": true,
+    "publish.local.unpackGroups": true,
+    "publish.local.borderColor": "rgba(0,0,0,1)",
+    "publish.local.addBorder": false,
+    "": false,
+    "publish.local.skipLoadingDelay": false
+}

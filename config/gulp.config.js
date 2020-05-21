@@ -8,6 +8,7 @@ module.exports = {
     '../Media Library/Themes/**/*',
     '!../Media Library/Themes/**/src/**',           // never include something from the src folder,
     '!../Media Library/Themes/**/images/flags/**',  // Skip the flags folder when a fixed legacy theme is used
+    '../Media Library/Project/**/*',
   ],
 
   // Specify all MediaLibrary files for upload only, will NOT be part of distribution

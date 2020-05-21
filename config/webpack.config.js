@@ -24,7 +24,19 @@ const customEntryOutputConfigurations = {
 			libraryTarget: 'umd',
 			filename: 'scripts/[name].js'
 		}
-	}
+	},
+
+	// extensiontheme_GWD: {
+	// 	entry: {
+	// 		'pre-optimized-min2': [ '../Media Library/Extension Themes/GWD/src/index.js' ]
+	// 	},
+	// 	output: {
+	// 		path: path.resolve(__dirname, '../Media Library/Themes/DMP'),
+	// 		library: 'extensiontheme_GWD',
+	// 		libraryTarget: 'umd',
+	// 		filename: 'scripts/[name].js'
+	// 	}
+	// }
 };
 
 // load this plugin to allow the css files to be extracted to it's own file.

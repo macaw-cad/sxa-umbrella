@@ -1,0 +1,31 @@
+<h1>RISING STAR</h1>
+      <gwd-page id="banner-page" data-gwd-name="Banner page" class="gwd-page-wrapper banner gwd-lightbox gwd-div-z08s" data-gwd-width="970px" data-gwd-height="90px" style="display: block;">
+        <div class="gwd-page-content banner">
+          <gwd-taparea id="bg-col-exit" class="gwd-taparea-ld5w">
+            <div class="gwd-div-q0g4" id="bg-col-txt">Description Text
+            </div>
+          </gwd-taparea>
+          <gwd-taparea id="btn-expand" class="gwd-taparea-5lvr" style="background-image: none;">
+            <div class="gwd-div-h6rp" id="btn-expand-txt">Expand
+            </div>
+          </gwd-taparea>
+          <gwd-taparea id="logo-col-exit" class="gwd-taparea-cl4o">
+            <gwd-image class="gwd-img-bmsb" source="assets/logo_horz_1.svg" id="logo-col"></gwd-image>
+          </gwd-taparea>
+        </div>
+      </gwd-page>
+      <gwd-page id="expanded-page" expanded="" data-gwd-name="Expanded page" class="gwd-page-wrapper expanded gwd-lightbox gwd-div-wqwm gwd-div-7x0r" data-gwd-width="970px" data-gwd-height="180px">
+        <div class="gwd-page-content expanded">
+          <gwd-taparea id="bg-exp-exit" class="gwd-taparea-voma">
+            <div class="gwd-div-j9hu" id="des-txt-exp">Description Text
+            </div>
+          </gwd-taparea>
+          <gwd-taparea id="logo-exp-exit" class="gwd-taparea-mbph">
+            <gwd-image class="gwd-img-529z" source="assets/logo_horz_1.svg" id="logo-exp"></gwd-image>
+          </gwd-taparea>
+          <gwd-taparea id="btn-close" class="gwd-taparea-7sfk">
+            <gwd-image class="gwd-img-gib9" source="assets/close.svg" id="close-img"></gwd-image>
+          </gwd-taparea>
+        </div>
+      </gwd-page>
+  

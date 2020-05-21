@@ -1,0 +1,10 @@
+<div align="center">
+  <h1>GWD DynamicPages</h1>
+    <script>var myIframe_data = {"Product":[{"name":"Serge"}]};</script>
+    <iframe id="myIframe"
+            src="/dmp/-/media/Project/GWD/DynamicPages/index.html" 
+            width="300" 
+            height="250"
+            allowfullscreen="true">
+    </iframe>
+</div>
