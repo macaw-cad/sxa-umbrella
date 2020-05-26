@@ -7,7 +7,7 @@ node_modules
 /dist
 /stats
 
-/Media Library/Themes/DMP/scripts
-/Media Library/Themes/DMP/styles
-/Media Library/Feature/DMP/DMP Bootstrap 4/scripts
-/Media Library/Feature/DMP/DMP Bootstrap 4/styles
+/Media Library/Themes/DigitalMarketingPlatform/ComponentLibrary/ComponentLibrary/scripts
+/Media Library/Themes/DigitalMarketingPlatform/ComponentLibrary/ComponentLibrary/styles
+/Media Library/Feature/DMP Bootstrap 4/DMP Bootstrap 4 Grid Theme/scripts
+/Media Library/Feature/DMP Bootstrap 4/DMP Bootstrap 4 Grid Theme/styles

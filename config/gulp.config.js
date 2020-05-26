@@ -2,12 +2,14 @@ module.exports = {
   // Specify all MediaLibrary files for upload AND distribution
   mediaLibraryUploadAndDistributionGlob: [
     '../Media Library/Base Themes/**',
-    '!../Media Library/Base Themes/**/src/**',      // never include something from the src folder,
+    '!../Media Library/Base Themes/**/src/**',      // never include something from the src folder
     '../Media Library/Extension Themes/**',
-    '!../Media Library/Extension Themes/**/src/**', // never include something from the src folder,
-    '../Media Library/Themes/**/*',
-    '!../Media Library/Themes/**/src/**',           // never include something from the src folder,
+    '!../Media Library/Extension Themes/**/src/**', // never include something from the src folder
+    '../Media Library/Themes/**',
+    '!../Media Library/Themes/**/src/**',           // never include something from the src folder
     '!../Media Library/Themes/**/images/flags/**',  // Skip the flags folder when a fixed legacy theme is used
+    '../Media Library/Feature/DMP Bootstrap 4/**',
+    '!../Media Library/Feature/DMP Bootstrap 4/**/src/**',  // never include something from the src folder
   ],
 
   // Specify all MediaLibrary files for upload only, will NOT be part of distribution
@@ -26,6 +28,9 @@ module.exports = {
     '../Media Library/Themes/**/scripts/**',
     '../Media Library/Themes/**/styles/**',
     '!../Media Library/Themes/**/src/**',              // never clean something from the src folder,
+    '../Media Library/Feature/DMP Bootstrap 4/**/scripts/**',
+    '../Media Library/Feature/DMP Bootstrap 4/**/styles/**',
+    '!../Media Library/Feature/DMP Bootstrap 4/**/src/**',  // never include something from the src folder
   ],
 
   // The "limiter.schedule()" functionality of the NPM package Bottleneck (https://www.npmjs.com/package/bottleneck)

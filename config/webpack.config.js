@@ -4,23 +4,23 @@ var path = require('path');
 const customEntryOutputConfigurations = {
 	grid_DMP_Bootstrap_4: {
 		entry: {
-			'pre-optimized-min': ['../Media Library/Feature/DMP/DMP Bootstrap 4/src/grid.ts']
+			'pre-optimized-min': ['../Media Library/Feature/DMP Bootstrap 4/DMP Bootstrap 4 Grid Theme/src/grid.ts']
 		},
 		output: {
-			path: path.resolve(__dirname, '../Media Library/Feature/DMP/DMP Bootstrap 4'),
+			path: path.resolve(__dirname, '../Media Library/Feature//DMP Bootstrap 4/DMP Bootstrap 4 Grid Theme'),
 			library: 'grid_DMP_Bootstrap_4',
 			libraryTarget: 'umd',
 			filename: 'scripts/[name].js'
 		}
 	},
 
-	theme_DMP: {
+	theme_ComponentLibrary: {
 		entry: {
-			'pre-optimized-min': [ '../Media Library/Themes/DMP/src/index.ts' ]
+			'pre-optimized-min': [ '../Media Library/Themes/DigitalMarketingPlatform/ComponentLibrary/ComponentLibrary/src/index.ts' ]
 		},
 		output: {
-			path: path.resolve(__dirname, '../Media Library/Themes/DMP'),
-			library: 'theme_DMP',
+			path: path.resolve(__dirname, '../Media Library/Themes/DigitalMarketingPlatform/ComponentLibrary/ComponentLibrary'),
+			library: 'theme_ComponentLibrary',
 			libraryTarget: 'umd',
 			filename: 'scripts/[name].js'
 		}
