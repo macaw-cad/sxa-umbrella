@@ -1,5 +1,5 @@
 {
-    "server": "https://umbrellacorpsc.dev.local",
+    "server": "https://dmpsc.dev.local",
     "user": { 
         "login": "sitecore\\admin", 
         "password": "b" 
