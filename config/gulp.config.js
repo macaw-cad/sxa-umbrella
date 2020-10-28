@@ -37,7 +37,7 @@ module.exports = {
   // is used to handle file changes and requests to the Sitecore API.  Play with this configuration to 
   // optimize for your situation. 
   bottleneckConfig: {
-    maxConcurrent: 5,
+    maxConcurrent: 1, // Otherwise Sitecore will create items with duplicate names
     minTime: 100
   },
 
