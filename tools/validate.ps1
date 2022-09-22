@@ -13,7 +13,7 @@ Import-Module -Name $PSScriptRoot\modules\ModuleManagement.psm1 -Force
 Install-ModuleIfNotInstalled -moduleName SPE -minimalVersion 6.1.0 
 Import-Module -Name $PSScriptRoot\modules\ValidateRenderingVariants.psm1 -DisableNameChecking -Force
 
-# All validation relative from the root of the frnt-end folder (e.g. ..)
+# All validation relative from the root of the front-end folder (e.g. ..)
 Set-Location -Path $PSScriptRoot\..
 
 $config = Get-Content -Raw -Path config/config.json | ConvertFrom-Json

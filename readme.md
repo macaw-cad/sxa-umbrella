@@ -9,9 +9,9 @@ SXA Umbrella provides the project structure and tools to optimize the front-end 
 To get you up and running as quick as possible to test out the SXA Umbrella tooling we make the following assumptions to "connect" to the provided code structure. Note that the tooling can handle ANY required structure:
 - **tenant**: `DigitalMarketingPlatform` (use your own tenant name)
 - **site**: `ComponentLibrary` (site for showcasing components, can be used as a [shared site](https://doc.sitecore.com/developers/sxa/93/sitecore-experience-accelerator/en/recommendations--sharing-content.html) for the tenant)
-- Modules will be organized under a folder named `DMP` to prevent collision with the out-of-the-box `Experience Accelerator` folder
+- Modules will be organized under a folder named `DMP` (abbreviation for Digital Marketing Platform) to prevent collision with the out-of-the-box `Experience Accelerator` folder
 
-Get up and running with SXA Umbrella given a Sitecore 9.3 environment with SXA enabled:
+Get up and running with SXA Umbrella given a Sitecore 9.3 or higher environment with SXA enabled:
 
 ### Enable the Sitecore "Creative Exchange" end-points
 **Why?** SXA Umbrella uses, just like the SXA CLI tooling by Sitecore, the Creative Exchange endpoints to sync changes to the Sitecore server.
